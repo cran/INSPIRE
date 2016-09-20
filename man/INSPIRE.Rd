@@ -40,7 +40,7 @@ lambda = .1 #penalty parameter to induce sparsity
 # download two real gene expression datasets, where the rows are genes and columns are samples
 data('two_example_datasets')
 # log-normalize, and standardize each dataset
-res = INSPIRE(list(scale(log(example_dataset1)), scale(log(example_dataset2))), mcnt, lambda)
+res = INSPIRE(list(scale(log(exmp_dataset1)), scale(log(exmp_dataset2))), mcnt, lambda)
 }
 }
 

@@ -23,7 +23,7 @@
 #' # download two real gene expression datasets, where the rows are genes and columns are samples
 #' data('two_example_datasets')
 #' # log-normalize, and standardize each dataset
-#' res = INSPIRE(list(scale(log(example_dataset1)), scale(log(example_dataset2))), mcnt, lambda)
+#' res = INSPIRE(list(scale(log(exmp_dataset1)), scale(log(exmp_dataset2))), mcnt, lambda)
 #' }
 #' @export
 
@@ -71,7 +71,7 @@ INSPIRE = function(datasetlist, mcnt, lambda, printoutput=0, maxiter=100, thresh
 			storage.mode(L) = 'double'
 			storage.mode(Zout) = 'integer'
 			storage.mode(thetaout) = 'double'
-			res = .C('INSPIRE_R', alldata, Lout=L, as.integer(sz), as.integer(p), as.integer(mcnt), as.double(lambda), as.integer(maxiter), as.double(threshold), as.integer(printoutput), as.integer(miss), thetaout=thetaout, Zout=Zout)
+			res = .C('INSPIRE', alldata, Lout=L, as.integer(sz), as.integer(p), as.integer(mcnt), as.double(lambda), as.integer(maxiter), as.double(threshold), as.integer(printoutput), as.integer(miss), thetaout=thetaout, Zout=Zout)
 			
 			L = t(matrix(res$Lout, nrow=mcnt, ncol=length(allsamples)))
 			rownames(L) = allsamples

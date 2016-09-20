@@ -2,7 +2,7 @@ Package: INSPIRE
 Type: Package
 Title: Inferring Shared Modules from Multiple Gene Expression Datasets
         with Partially Overlapping Gene Sets
-Version: 1.1
+Version: 1.3
 Date: 2016-09-16
 Author: Safiye Celik
 Maintainer: Safiye Celik <safiye@cs.washington.edu>
@@ -18,6 +18,6 @@ URL: inspire.cs.washington.edu
 Imports: missMDA
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2016-09-17 06:55:08 UTC; safiye
+Packaged: 2016-09-20 20:55:14 UTC; safiye
 Repository: CRAN
-Date/Publication: 2016-09-17 12:12:24
+Date/Publication: 2016-09-20 23:39:52
