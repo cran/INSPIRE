@@ -4,8 +4,8 @@
 \alias{INSPIRE}
 \title{Inferring Shared Modules from Multiple Gene Expression Datasets with Partially Overlapping Gene Sets}
 \usage{
-INSPIRE(datasetlist, mcnt, lambda, printoutput = 0, maxiter = 100,
-  threshold = 0.01)
+INSPIRE(datasetlist, mcnt, lambda, printoutput = 0, maxinitKMiter = 100,
+  maxiter = 100, threshold = 0.01, initseed = 123)
 }
 \arguments{
 \item{datasetlist}{A list of gene expression matrices of size n_i x p_i where rows represent samples and columns represent genes for each dataset i.  This can be created by using the list() command, e.g., list(dataset1, dataset2, dataset3)}
@@ -16,9 +16,13 @@ INSPIRE(datasetlist, mcnt, lambda, printoutput = 0, maxiter = 100,
 
 \item{printoutput}{0 or 1 representing whether the progress of the algorithm should be displayed (0 means no display which is the default)}
 
+\item{maxinitKMiter}{Maximum number of K-means iterations performed to initialize the parameters (the default is 100 iterations)}
+
 \item{maxiter}{Maximum number of INSPIRE iterations performed to update the parameters (the default is 100 iterations)}
 
 \item{threshold}{Convergence threshold measured as the relative change in the sum of the elements of the estimated precision matrices in two consecutive iterations (the default is 10^-2)}
+
+\item{initseed}{The random seed set right before the K-means call which is performed to initialize the parameters}
 }
 \value{
 \item{L}{A matrix of size (sum_n_i) x mcnt representing the inferred latent variables (the low-dimensional representation - or LDR - of the data)}

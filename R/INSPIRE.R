@@ -7,8 +7,10 @@
 #' @param mcnt A positive integer representing the number of modules to learn from the data
 #' @param lambda A penalty parameter that regularizes the estimated precision matrix representing the conditional dependencies among the modules
 #' @param printoutput 0 or 1 representing whether the progress of the algorithm should be displayed (0 means no display which is the default)
+#' @param maxinitKMiter Maximum number of K-means iterations performed to initialize the parameters (the default is 100 iterations)
 #' @param maxiter Maximum number of INSPIRE iterations performed to update the parameters (the default is 100 iterations)
 #' @param threshold Convergence threshold measured as the relative change in the sum of the elements of the estimated precision matrices in two consecutive iterations (the default is 10^-2)
+#' @param initseed The random seed set right before the K-means call which is performed to initialize the parameters
 #' @return \item{L}{A matrix of size (sum_n_i) x mcnt representing the inferred latent variables (the low-dimensional representation - or LDR - of the data)}
 #' @return \item{Z}{A list of vectors of size p_i representing the learned assignment of each of the genes in each dataset i to one of mcnt modules}
 #' @return \item{theta}{Estimated precision matrix of size mcnt x mcnt representing the conditional dependencies among the modules}
@@ -27,7 +29,7 @@
 #' }
 #' @export
 
-INSPIRE = function(datasetlist, mcnt, lambda, printoutput=0, maxiter=100, threshold=1e-2){
+INSPIRE = function(datasetlist, mcnt, lambda, printoutput=0, maxinitKMiter=100, maxiter=100, threshold=1e-2, initseed=123){
 	if (requireNamespace('missMDA', quietly = TRUE)) {
 		if(length(datasetlist) > 0) {
 			for (i in 1:length(datasetlist)) {
@@ -53,8 +55,8 @@ INSPIRE = function(datasetlist, mcnt, lambda, printoutput=0, maxiter=100, thresh
 				dataimputed = alldata
 			}
 			
-			set.seed(123)
-			resKMimp = kmeans(t(dataimputed), mcnt, algorithm = 'Lloyd', iter.max = 100)
+			set.seed(initseed)
+			resKMimp = kmeans(t(dataimputed), mcnt, algorithm = 'Lloyd', iter.max = maxinitKMiter)
 			L = t(resKMimp$centers)
 
 			miss = .Machine$integer.max
